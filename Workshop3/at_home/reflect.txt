@@ -1,0 +1,3 @@
+1. In my own code the object orriented programming feature that I have used is encapulations by using private and public on my class CreditCard
+
+2. The do while on the main program is used to loop what is inside it while the condition inside the while(...) remain true. Once the condition inside becomes falls that ends the loop. In this program the loop will keep asking the user to input credit card information if the entered info is invalid. The type unsigned long long is used for credit card number because credit card have 16 digits. So to handle long/large value, long long is used because it can store a size of 64 bits.
