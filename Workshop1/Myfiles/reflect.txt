@@ -1,0 +1,3 @@
+A namespace is a declarative region where names can be declared. It gives the modules a scope to the identifiers such as functions, variables name of typing, etc. Namespace prevents collisions by organizing codes into groups when using multiple libraries. This enables the compiler to differentiate codes with similar names.
+
+Header files are needed because it enables the programmer to reuse codes such as function declarations, classes declarations and other informations. It also makes the programmer work effiently because it enables the programmer to separate each codes into different header files so not all the codes will be in the main file/module. 

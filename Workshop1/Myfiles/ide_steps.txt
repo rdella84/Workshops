@@ -1,0 +1,16 @@
+Steps to create a simple console application in the IDE:
+
+1. Click File->New->Project.
+
+2. Click on Visual C++ and on the screen on the right, click Win32 Console Application
+
+3. Then at the bottom you can name your project and see or change the location where your project is saved. Click OK.
+
+4. A window will pop up and click next. Make sure in the 'Application type' console application is selected.
+
+5. Uncheck 'Precompiled header' and Security Development Lifecycle(SDL)check. Then check 'Empty project'. Click Finish.
+
+6. Now that your console application is created. Right click on source files on 'Solution Explorer' and you have the option to add new items or existing items.
+
+
+
