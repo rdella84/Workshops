@@ -44,7 +44,7 @@ namespace holiday {
 	
 	// Passenger with 5 parameters
 	Passenger::Passenger(const char* Name, const char* destination, int year, int month, int day) {
-		bool valid = Name != nullptr && destination != nullptr && strcmp(Name, "") != 0 && strcmp(destination, "") != 0 && 
+		bool valid = Name != nullptr && destination != nullptr && strcmp(Name, "") != 0 && strcmp(destination, "") != 0 &&
 			year >= 2017 && year <= 2020 && month >= 1 && month <= 12 && day >= 1 && day <= 31;
 
 		if (valid) {
@@ -74,29 +74,46 @@ namespace holiday {
 	void Passenger::travelWith(const Passenger* arrPassengers, int size) {
 
 		//Use display and canTravelWith
-
+		bool valid = arrPassengers != nullptr && arrPassengers != 0 && size != 0;
 		bool ret = false;
-		int i = 0;
-		char name[32] = "";
+		int i, cnt = 0;
+		if (valid) {
+			for (i = 0; i < size; i++) {
+				if (this->canTravelWith(arrPassengers[i])) {
+					cnt++;
+				}
+			}
 
-		for (i; i < size; i++) {
-			if (canTravelWith(arrPassengers[i])) {
-				ret = true;
+			if (cnt == size) {
+				cout << "Everybody can join " << m_name << " on vacation!" << endl;
+				cout << m_name << " will be accompanied by ";
+				for (i = 0; i < size; i++) {
+					if (i != 0)
+						cout << ", ";
+					arrPassengers[i].display(m_name);
+				}
+				cout << "." << endl;
+			}
+			
+			else if (cnt != size) {
+				cout << m_name << " will be accompanied by ";
+								
+				for (i = 0; i < size; i++) {
+					if (this->canTravelWith(arrPassengers[i])) {
+						if (i != 0)
+							cout << ", ";
+						arrPassengers[i].display(m_name);
+					}
+				}
+				cout << "." << endl;
 			}
 		}
-		if (ret) {
-			cout << "Everybody can join " << m_name << " on vacation! " << endl;
-			cout << m_name << " will be accompanied by ";
-			for (i; i < size; i++) {
-				cout << arrPassengers[i] << ",";
-			}
-			cout << "." << endl;
-		}			
+
 		else
-				cout << "Nobody can join " << m_name << " on vacation!" << endl;	
+			cout << "Nobody can join " << m_name << " on vacation!" << endl;	
 	}
 
-
+	
 	// TODO: add the isEmpty() function here
 	bool Passenger::isEmpty() const {
 		bool ret = false;

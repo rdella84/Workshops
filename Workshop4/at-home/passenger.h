@@ -17,7 +17,6 @@ namespace holiday {
 		int m_departureYear;
 		int m_departureMonth;
 		int m_departureDay;
-		void setEmpty();
 	public:
 		// TODO: add the class the attributes,
 		//       the member function already provided,
@@ -29,6 +28,7 @@ namespace holiday {
 		bool canTravelWith(const Passenger&) const;
 		bool isEmpty() const;
 		void travelWith(const Passenger* arrPassengers, int size);
+		void setEmpty();
 	};
 
 }

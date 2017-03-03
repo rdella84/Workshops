@@ -1,0 +1,7 @@
+Regio Della
+
+1. A safe empty state means that object's instance is initialized to a default value using a constructor. This makes sure that there is no junk within object's instance. I would also add Passenger objects such as travelers, David and the array members of friends to be put into a safe empty state. This is done so to avoid junk within the files and just use a function for example set(); to set values for this objects.
+
+2. Having multiple constructors simplify the code because each overloaded constructor can do its own function different from the rest and it can have different validation for a value to be set.
+
+3. I learned to work with overloading functions and I also learned that creating a function to set values to a safe empty safe is more organized and easier rather than retyping every value again. I also learned how *this work by observing the display function as it displays the current object pointed by the *this. I also learned that you could set empty chars without using strcpy.
