@@ -7,7 +7,7 @@
 namespace communication {
 	class Contact
 	{
-		char m_name[21];
+		char* m_name;
 		long long* m_phoneNumbers;
 		int m_noOfPhoneNumbers;
 	public:
