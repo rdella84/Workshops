@@ -35,17 +35,24 @@ namespace ict {
       // constructors
 	  Date();
 	  Date(int year, int month, int day);
+	  Date(int year, int month, int day, int hour, int min);
       void set();
       // operator ovrloads
-
+	  bool operator==(const Date& D)const;
+	  bool operator!=(const Date& D)const;
+	  bool operator<(const Date& D)const;
+	  bool operator>(const Date& D)const;
+	  bool operator<=(const Date& D)const;
+	  bool operator>=(const Date& D)const;
       // methods
 	  bool dateOnly()const;
-
       int mdays()const;
-
+	  int errCode()const;
+	  bool bad()const;
+	  void dateOnly(bool value);
       // istream  and ostream read and write methods
-
-
+	  std::istream& read(std::istream& is = std::cin);
+	  std::ostream& write(std::ostream& ostr = std::cout)const;
    };
    // operator<< and >> overload prototypes for cout and cin
 

@@ -13,8 +13,24 @@ namespace ict {
 		this->set();
 	}
 
-	bool Date::dateOnly()const {
-		return m_dateOnly;
+	Date::Date(int year, int month, int day) {
+		m_dateOnly = true;
+		m_year = year;
+		m_mon = month;
+		m_day = day;
+		m_hour = 0;
+		m_min = 0;
+		m_readErrorCode = NO_ERROR;
+	}
+
+	Date::Date(int year, int month, int day, int hour, int min = 0) {
+		m_dateOnly = false;
+		m_year = year;
+		m_mon = month;
+		m_day = day;
+		m_hour = hour;
+		m_min = min;
+		m_readErrorCode = NO_ERROR;
 	}
 
 	void Date::set() {
@@ -44,8 +60,58 @@ namespace ict {
 	}
 
 	void Date::errCode(int errorCode) {
-		
+		m_readErrorCode = errorCode;
 	}
 
+	void Date::set(int year, int mon, int day, int hour, int min) {
+		m_readErrorCode = NO_ERROR;
+		m_year = year;
+		m_mon = mon;
+		m_day = day;
+		m_hour = hour;
+		m_min = min;
+	}
 
+	bool Date::operator==(const Date& D)const {
+		return this->value() == D.value();
+	}
+	bool Date::operator!=(const Date& D)const {
+		return this->value() != D.value();
+	}
+	bool Date::operator<(const Date& D)const {
+		return this->value() < D.value();
+	}
+	bool Date::operator>(const Date& D)const {
+		return this->value() > D.value();
+	}
+	bool Date::operator<=(const Date& D)const {
+		return this->value() <= D.value();
+	}
+	bool Date::operator>=(const Date& D)const {
+		return this->value() >= D.value();
+	}
+
+	int Date::errCode()const {
+		return m_readErrorCode;
+	}
+	
+	bool Date::bad()const {
+		return m_readErrorCode != NO_ERROR;
+	}
+
+	bool Date::dateOnly()const {
+		return m_dateOnly;
+	}
+
+	void Date::dateOnly(bool value) {
+		m_dateOnly = value;
+		if (m_dateOnly == true) {
+			m_hour = 0;
+			m_min = 0;
+		}
+	}
+
+	std::istream& Date::read(std::istream& is = std::cin) {
+
+	}
 }
