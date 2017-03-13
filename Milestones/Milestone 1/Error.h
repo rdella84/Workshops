@@ -1,4 +1,6 @@
 // compilation safegaurds
+#ifndef ICT_ERROR_H_
+#define ICT_ERROR_H_
 
 #include <iostream>
 namespace ict {
@@ -21,4 +23,4 @@ namespace ict {
    // operator << overload prototype for cout
 }
 
-
+#endif
