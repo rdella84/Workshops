@@ -111,7 +111,31 @@ namespace ict {
 		}
 	}
 
-	std::istream& Date::read(std::istream& is = std::cin) {
+	std::istream& Date::read(std::istream& istr = std::cin) {
+		if (dateOnly() == true) {
+			istr >> m_year >> "/" >> m_mon >> "/" >> m_day;
+			if (cin.fail() == true)
+				m_readErrorCode = CIN_FAILED;
+			else {
+				while()
+			}
 
+		}
+		else {
+			while (cin.fail() != true)
+				istr >> m_year >> "/" >> m_mon >> "/" >> m_day >> ", " >> m_hour >> ":" >> m_min;
+			if (cin.fail() == true)
+				m_readErrorCode = CIN_FAILED;
+		}
+
+	}
+
+	std::ostream& Date::write(std::ostream& ostr = std::cout)const {
+		if (dateOnly() == true)
+			ostr << m_year << "/" << m_mon << "/" << m_day << endl;
+		else
+			ostr << m_year << "/" << m_mon << "/" << m_day << ", " << m_hour << ":" << m_min << endl;
+
+		return ostr;
 	}
 }

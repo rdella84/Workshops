@@ -142,7 +142,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="01-DefValTester.cpp" />
+    <ClCompile Include="02-ConstructorTester.cpp" />
     <ClCompile Include="Date.cpp" />
     <ClCompile Include="Error.cpp" />
   </ItemGroup>

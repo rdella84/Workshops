@@ -51,7 +51,7 @@ namespace ict {
 	  bool bad()const;
 	  void dateOnly(bool value);
       // istream  and ostream read and write methods
-	  std::istream& read(std::istream& is = std::cin);
+	  std::istream& read(std::istream& istr = std::cin);
 	  std::ostream& write(std::ostream& ostr = std::cout)const;
    };
    // operator<< and >> overload prototypes for cout and cin
