@@ -16,8 +16,7 @@ namespace ict {
 	Date::Date(int year, int month, int day) {
 		m_dateOnly = true;
 		m_year = year;
-		if(m_mon < 10)
-			m_mon = 0 + month;
+		m_mon = month;
 		m_day = day;
 		m_hour = 0;
 		m_min = 0;
@@ -203,18 +202,47 @@ namespace ict {
 	}
 
 	std::ostream& Date::write(std::ostream& ostr)const {
-		if (m_dateOnly)
-			ostr << m_year << "/" << m_mon << "/" << m_day;
-		else
-			ostr << m_year << "/" << m_mon << "/" << m_day << ", " << m_hour << ":" << m_min;
+		if (m_dateOnly) {
 
+			ostr << m_year;
+			if (m_mon < 9)
+				ostr << "/" << "0" << m_mon;
+			else
+				ostr << "/" << m_mon;
+			if (m_day < 9)
+				ostr << "/" << "0" << m_day;
+			else
+				ostr << "/" << m_day;
+
+			
+		}
+		else {
+
+			ostr << m_year;
+			if (m_mon < 9)
+				ostr << "/" << "0" << m_mon;
+			else
+				ostr << "/" << m_mon;
+			if (m_day < 9)
+				ostr << "/" << "0" << m_day;
+			else
+				ostr << "/" << m_day;
+			if (m_hour < 9)
+				ostr << ", " << "0" << m_hour;
+			else
+				ostr << ", " << m_hour;
+			if (m_min < 9)
+				ostr << ":" << "0" << m_min;
+			else
+				ostr << ":" << m_min;
+		}
 		return ostr;
 	}
 	std::ostream& operator<<(std::ostream& ostr, const Date& ct) {
 		ct.write(ostr);
 		return ostr;
 	}
-	std::istream& operator >> (std::istream& istr, Date& cn) {
+	std::istream& operator>>(std::istream& istr, Date& cn) {
 		cn.read(istr);
 		return istr;
 	}

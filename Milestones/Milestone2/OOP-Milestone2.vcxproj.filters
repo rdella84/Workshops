@@ -21,6 +21,9 @@
     <ClCompile Include="244_ms2_tester_prof.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="244_ms2_tester.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MyFile.h">
