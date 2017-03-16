@@ -12,10 +12,22 @@ namespace ict{
 		message(errorMessage);
 	}
 
+	Error::~Error() {
+		clear();
+	}
+
 	void Error::message(const char* value) {
-		delete [] m_message;
+		delete[] m_message;
 		m_message = new char[strlen(value) + 1];
 		strcpy(m_message, value);
+	}
+
+	Error::operator const char*() const {
+		return m_message;
+	}
+
+	Error::operator bool()const {
+		return m_message == nullptr;
 	}
 	
 	void Error::operator=(const char* errorMessage) {
@@ -29,19 +41,7 @@ namespace ict{
 	}
 
 	bool Error::isClear()const {
-		return m_message == nullptr;
-	}
-
-	Error::operator const char*() const {
-		return m_message;
-	}
-
-	Error::operator bool()const {
-		return m_message == nullptr;
-	}
-
-	Error::~Error() {
-		delete[] m_message;
+		return this->m_message == nullptr;
 	}
 
 	const char* Error::value()const {

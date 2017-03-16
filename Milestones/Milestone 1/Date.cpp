@@ -10,13 +10,14 @@ using namespace std;
 namespace ict {
 	Date::Date() {
 		m_dateOnly = false;
-		this->set();
+		set();
 	}
 
 	Date::Date(int year, int month, int day) {
 		m_dateOnly = true;
 		m_year = year;
-		m_mon = month;
+		if(m_mon < 10)
+			m_mon = 0 + month;
 		m_day = day;
 		m_hour = 0;
 		m_min = 0;
@@ -197,9 +198,8 @@ namespace ict {
 			else if (!(m_min >= MIN_MIN && m_min <= MAX_MIN))
 				if (m_readErrorCode == NO_ERROR)
 					m_readErrorCode = MIN_ERROR;
-
-			return istr;
 		}
+		return istr;
 	}
 
 	std::ostream& Date::write(std::ostream& ostr)const {

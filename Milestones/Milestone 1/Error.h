@@ -2,6 +2,7 @@
 #ifndef ICT_ERROR_H_
 #define ICT_ERROR_H_
 
+#include <cstring>
 #include <iostream>
 namespace ict {
 	class Error {

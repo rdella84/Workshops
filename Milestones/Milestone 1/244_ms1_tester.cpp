@@ -28,11 +28,11 @@ int main() {
    int i = 0;
    // uncomment the tests you would like to do
 
-   // ok = ok && DefValTester_test1() && (i += 1) && cout << "##################"<< endl;
-   // ok = ok && ConstructorTester_test2() && (i += 1)  && cout << "##################"<< endl;
-   // ok = ok && LogicalOperator_test3() && (i += 1)  && cout << "##################"<< endl;
-   // ok = ok && ErrorHandling_test4() && (i += 1)  && cout << "##################"<< endl;
-   // ok = ok && ErrorTester_test5() && (i += 1)  && cout << "##################"<< endl;
+    ok = ok && DefValTester_test1() && (i += 1) && cout << "##################"<< endl;
+    ok = ok && ConstructorTester_test2() && (i += 1)  && cout << "##################"<< endl;
+    ok = ok && LogicalOperator_test3() && (i += 1)  && cout << "##################"<< endl;
+    ok = ok && ErrorHandling_test4() && (i += 1)  && cout << "##################"<< endl;
+    ok = ok && ErrorTester_test5() && (i += 1)  && cout << "##################"<< endl;
    
    
    if (ok ) {

@@ -2,6 +2,7 @@
 #ifndef ICT_DATE_H_
 #define ICT_DATE_H_
 
+#include <cstring>
 #include <iostream>
 // ict namespace 
 namespace ict {
