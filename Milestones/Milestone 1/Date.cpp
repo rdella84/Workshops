@@ -23,7 +23,7 @@ namespace ict {
 		m_readErrorCode = NO_ERROR;
 	}
 
-	Date::Date(int year, int month, int day, int hour, int min = 0) {
+	Date::Date(int year, int month, int day, int hour, int min) {
 		m_dateOnly = false;
 		m_year = year;
 		m_mon = month;
@@ -94,7 +94,7 @@ namespace ict {
 	int Date::errCode()const {
 		return m_readErrorCode;
 	}
-	
+
 	bool Date::bad()const {
 		return m_readErrorCode != NO_ERROR;
 	}
@@ -111,31 +111,111 @@ namespace ict {
 		}
 	}
 
-	std::istream& Date::read(std::istream& istr = std::cin) {
-		if (dateOnly() == true) {
-			istr >> m_year >> "/" >> m_mon >> "/" >> m_day;
-			if (cin.fail() == true)
+	std::istream& Date::read(std::istream& istr) {
+		char slash, colon, comma;
+		m_readErrorCode = NO_ERROR;
+
+		if (dateOnly()) {
+
+			istr >> m_year;
+			if (istr.fail())
 				m_readErrorCode = CIN_FAILED;
-			else {
-				while()
-			}
+			else if (!(m_year >= MIN_YEAR && m_year <= MAX_YEAR))
+				m_readErrorCode = YEAR_ERROR;
+
+			istr >> slash;
+			if (istr.fail())
+				m_readErrorCode = CIN_FAILED;
+
+			istr >> m_mon;
+			if (istr.fail())
+				m_readErrorCode = CIN_FAILED;
+			else if (!(m_mon >= MIN_MON && m_mon <= MAX_MON))
+				if (m_readErrorCode == NO_ERROR)
+					m_readErrorCode = MON_ERROR;
+
+			istr >> slash;
+			if (istr.fail())
+				m_readErrorCode = CIN_FAILED;
+
+			istr >> m_day;
+			if (istr.fail())
+				m_readErrorCode = CIN_FAILED;
+			else if (!(m_day <= mdays() && m_day >= 1))
+				if (m_readErrorCode == NO_ERROR)
+					m_readErrorCode = DAY_ERROR;
 
 		}
+
 		else {
-			while (cin.fail() != true)
-				istr >> m_year >> "/" >> m_mon >> "/" >> m_day >> ", " >> m_hour >> ":" >> m_min;
-			if (cin.fail() == true)
+			istr >> m_year;
+			if (istr.fail())
 				m_readErrorCode = CIN_FAILED;
-		}
+			else if (!(m_year >= MIN_YEAR && m_year <= MAX_YEAR))
+				m_readErrorCode = YEAR_ERROR;
 
+			istr >> slash;
+			if (istr.fail())
+				m_readErrorCode = CIN_FAILED;
+
+			istr >> m_mon;
+			if (istr.fail())
+				m_readErrorCode = CIN_FAILED;
+			else if (!(m_mon >= MIN_MON && m_mon <= MAX_MON))
+				if (m_readErrorCode == NO_ERROR)
+					m_readErrorCode = MON_ERROR;
+
+			istr >> slash;
+			if (istr.fail())
+				m_readErrorCode = CIN_FAILED;
+
+			istr >> m_day;
+			if (istr.fail())
+				m_readErrorCode = CIN_FAILED;
+			else if (!(m_day <= mdays() && m_day >= 1))
+				if (m_readErrorCode == NO_ERROR)
+					m_readErrorCode = DAY_ERROR;
+
+			istr >> comma;
+			if (istr.fail())
+				m_readErrorCode = CIN_FAILED;
+
+			istr >> m_hour;
+			if (istr.fail())
+				m_readErrorCode = CIN_FAILED;
+			else if (!(m_hour >= MIN_HOUR && m_hour <= MAX_HOUR))
+				if (m_readErrorCode == NO_ERROR)
+					m_readErrorCode = HOUR_ERROR;
+
+			istr >> colon;
+			if (istr.fail())
+				m_readErrorCode = CIN_FAILED;
+
+			istr >> m_min;
+			if (istr.fail())
+				m_readErrorCode = CIN_FAILED;
+			else if (!(m_min >= MIN_MIN && m_min <= MAX_MIN))
+				if (m_readErrorCode == NO_ERROR)
+					m_readErrorCode = MIN_ERROR;
+
+			return istr;
+		}
 	}
 
-	std::ostream& Date::write(std::ostream& ostr = std::cout)const {
-		if (dateOnly() == true)
-			ostr << m_year << "/" << m_mon << "/" << m_day << endl;
+	std::ostream& Date::write(std::ostream& ostr)const {
+		if (m_dateOnly)
+			ostr << m_year << "/" << m_mon << "/" << m_day;
 		else
-			ostr << m_year << "/" << m_mon << "/" << m_day << ", " << m_hour << ":" << m_min << endl;
+			ostr << m_year << "/" << m_mon << "/" << m_day << ", " << m_hour << ":" << m_min;
 
 		return ostr;
+	}
+	std::ostream& operator<<(std::ostream& ostr, const Date& ct) {
+		ct.write(ostr);
+		return ostr;
+	}
+	std::istream& operator >> (std::istream& istr, Date& cn) {
+		cn.read(istr);
+		return istr;
 	}
 }

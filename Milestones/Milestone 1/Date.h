@@ -35,7 +35,7 @@ namespace ict {
       // constructors
 	  Date();
 	  Date(int year, int month, int day);
-	  Date(int year, int month, int day, int hour, int min);
+	  Date(int year, int month, int day, int hour, int min = 0);
       void set();
       // operator ovrloads
 	  bool operator==(const Date& D)const;
@@ -55,7 +55,8 @@ namespace ict {
 	  std::ostream& write(std::ostream& ostr = std::cout)const;
    };
    // operator<< and >> overload prototypes for cout and cin
-
+	std::ostream& operator<<(std::ostream& ostr, const Date &ct);
+	std::istream& operator>>(std::istream& istr, Date &cn);
 }
 
 #endif
