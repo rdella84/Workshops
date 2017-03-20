@@ -6,7 +6,7 @@ namespace ict{
 	
 	// constructor   
 	Account::Account(double amount) {
-		balance = amount;
+		setBalance(amount);
 	}
 
 	// credit (add) an amount to the account balance

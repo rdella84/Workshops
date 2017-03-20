@@ -11,7 +11,11 @@ namespace ict{
     		double interestRate; // interest rate (percentage)
 		public:
 			// TODO: put prototypes here
-			SavingsAccount(double bal, double interRate):balance(bal);
+			SavingsAccount(double bal, double interRate);
+
+			double calculateInterest()const;
+
+			void display(ostream& d)const;
    };
 };
 #endif
