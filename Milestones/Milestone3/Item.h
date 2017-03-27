@@ -3,7 +3,6 @@
 // inlcude PosIO and POS header files
 #include "PosIO.h"
 #include "POS.h"
-
 namespace ict {
 	// class Item
 	class Item : public PosIO {
@@ -16,13 +15,13 @@ namespace ict {
 		int m_quantity;
 	public:
 		Item();
-		Item(const char sku[], const char * name, double price, bool tax = true);
+		Item(const char sku[MAX_SKU_LEN], const char * name, double price, bool tax = true);
 		virtual ~Item();
-		const Item& operator=(const Item& m);
-		void cpyConstructor(const char sku[], const char * name, double price, bool tax = true);
+		const Item& operator=(const Item& m) ;
+		//void cpyConstructor(const char * sku, const char * name, double price, bool tax = true);
 
 		//Setters
-		void sku(const char sku[]);
+		void sku(const char * sku);
 		void name(const char * name);
 		void price(double price);
 		void taxed(bool tax);
@@ -41,6 +40,7 @@ namespace ict {
 		bool operator==(const char* sku)const;
 		int operator+=(int quantity)const;
 		int operator-=(int quantity)const;
+
 	};
 
 	// end class Item
@@ -48,8 +48,7 @@ namespace ict {
 	double operator+=(double& Loper, const Item& Roper);
 	// operator << and operator >>
 	std::ostream& operator<<(std::ostream& ostr, const Item& ct);
-	std::istream& operator >> (std::istream& istr, Item& k);
-
+	std::istream& operator>>(std::istream& istr, Item& k);
 }
 
 #endif

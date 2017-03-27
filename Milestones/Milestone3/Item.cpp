@@ -1,34 +1,37 @@
 #define _CRT_SECURE_NO_WARNINGS  
 // Lib includes
 #include <iostream>
+#include <iomanip>
+#include <cstring>
 // inlcude Item and POS header files
 #include "Item.h"
 #include "POS.h"
-
 using namespace std;
 namespace ict{
   // class Item implementaion
 	Item::Item() {
+		sku("");
+		m_name = nullptr;
 		m_price = 0.0;
 		m_quantity = 0;
 	}
 
-	Item::Item(const char sku[], const char * name, double price, bool tax) {
-		delete[] m_name;
+	Item::Item(const char sku[MAX_SKU_LEN], const char * name, double price, bool tax)
+	{
+		this->sku(sku);
+		m_name = new char[strlen(name) + 1];
+		this->name(name);
+		quantity(0);
+		this->price(price);
+		taxed(tax);
 
-		strcpy(m_sku, sku);
-		m_name = new char[sizeof(name) + 1];
-		strcpy(m_name, name);
-		m_quantity = 0;
-		m_price = price;
-		m_taxed = tax;
 	}
 
 	Item::~Item() {
 		delete[] m_name;
 	}
-
-	void Item::cpyConstructor(const char sku[], const char * name, double price, bool tax) {
+/*
+	void Item::cpyConstructor(const char * sku, const char * name, double price, bool tax) {
 
 		strcpy(m_sku, sku);
 		m_name = new char[sizeof(name) + 1];
@@ -37,11 +40,18 @@ namespace ict{
 		m_price = price;
 		m_taxed = tax;
 	}
+*/
 
 	const Item& Item::operator=(const Item& eq) {
 		delete[] m_name;
+		m_name = nullptr;
 		if (isEmpty() == false) {
-			cpyConstructor(eq.sku(), eq.name(), eq.price(), eq.taxed());
+			sku(eq.m_sku);
+			m_name = new char[strlen(eq.m_name) + 1];
+			name(eq.m_name);
+			m_quantity = 0;
+			price(eq.m_price);
+			taxed(eq.m_taxed);
 		}
 		
 		return *this;
@@ -49,7 +59,7 @@ namespace ict{
 
 
 	/****************************   Setters   ***************************/
-	void Item::sku(const char sku[]) {
+	void Item::sku(const char * sku) {
 		strcpy(m_sku, sku);
 	}
 	void Item::name(const char * name) {
@@ -86,19 +96,19 @@ namespace ict{
 	const double Item::cost()const{
 		double cost = 0.0;
 		if (taxed())
-			cost = m_price;
+			cost = m_price + (m_price * TAX);
 		else
-			cost = this->price();
+			cost = m_price;
 
 		return cost;
 	}
 
 	const bool Item::isEmpty()const {
-		return m_price == 0 && m_quantity == 0;
+		return m_sku[0] == 0 && m_name == nullptr && m_price == 0 && m_quantity == 0;
 	}
 
 	bool Item::operator==(const char* sku)const {
-		return this->m_sku == sku;
+		return strcmp(m_sku, sku);
 	}
 
 	int Item::operator+=(int quantity)const {
@@ -128,5 +138,4 @@ namespace ict{
 		cn.read(istr);
 		return istr;
 	}
-
 }
