@@ -42,6 +42,8 @@ namespace sict
         operator bool () const;
         // true if string *this and s2 are equal
         bool operator==(const String& s2)const;
+
+		const char*pString() const;
         
    };
 

@@ -48,7 +48,7 @@ namespace sict{
     // 
     String::String(const String& other)
 	{
-		strcpy(this->m_pString, other.m_pString);
+		strcpy(m_pString, other.m_pString);
     }
 
     
@@ -62,11 +62,11 @@ namespace sict{
     //     
     String& String::operator=(const String& other)
     {
-		if (this != &other) {
-			if (empty() == false) {
-				strcpy(m_pString, other.m_pString);
-			}
-		}
+		//if (this != &other) {
+		//	if (empty() == false) {
+		strcpy(m_pString, other.m_pString);
+		//	}
+		//}
 		return *this;
     }
 
@@ -80,8 +80,7 @@ namespace sict{
     // 
     String::~String()
     {
-		cout << "deleted" << endl;
-		delete[] m_pString;
+		m_pString[0] = '\0';
     }
 
 
@@ -94,7 +93,7 @@ namespace sict{
     // 
     int String::length() const
     {
-		return strlen(m_pString);
+		return strlen(this->m_pString);
     }
 
     //////////////////////////////////////////////////////
@@ -119,7 +118,7 @@ namespace sict{
     // length is 0.
     bool String::empty() const
     {
-		return strcmp(m_pString, "") == 0;
+		return length() == 0;
     }
 
     //////////////////////////////////////////////////////
@@ -131,7 +130,7 @@ namespace sict{
     //         
     String::operator bool() const
     {
-		return strcmp(m_pString, "") != 0;
+		return !empty();
     }
      
      
@@ -146,7 +145,7 @@ namespace sict{
     //           
     bool String::operator==(const String& s2) const
     {
-		return strcmp(m_pString, s2) == 1;
+		return strcmp(m_pString, s2) == 0;
     }
         
         
@@ -162,7 +161,7 @@ namespace sict{
     //         
     String& String::operator+=(const String& s2)
     {
-		strcat(this->m_pString, s2.m_pString);
+		*this = (*this + s2);
 		return *this;
     }
     
@@ -177,9 +176,13 @@ namespace sict{
     //     
     String String::operator+(const String& s2) const
     {
-		String temp = *this;
-		strcat(temp.m_pString, s2.m_pString);
-		return temp;
+		//int size = strlen(s2.m_pString) + 1;
+
+		char tempC[STRING_BUFFERSIZE];
+		strcpy(tempC, m_pString);
+		strcat(tempC, s2.m_pString);
+
+		return tempC;
     }
       
     //////////////////////////////////////////////////////
@@ -191,16 +194,21 @@ namespace sict{
     //        
     String& String::operator+= (char c)
     {
-		strcat(m_pString, &c);
 		
-		//int size = strlen(this->m_pString);
 		//this->m_pString[size] = c;
 		//this->m_pString[size + 1] = '\0';
 
+		char tempC[2];
+		tempC[0] = c;
+		tempC[1] = '\0';
+		strcat(m_pString, tempC);
+
 		return *this;
     }
-    
-    
+ 
+	const char* String::pString() const {
+		return m_pString;
+	}
     
     //////////////////////////////////////////////////////
     //
@@ -212,7 +220,8 @@ namespace sict{
     //     
     std::ostream& operator<<(std::ostream& ostream, const String &s)
     {
-		ostream << s;
+		ostream << s.pString();
+		ostream.clear();
 		return ostream;
     }
 

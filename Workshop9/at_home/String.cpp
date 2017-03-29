@@ -19,7 +19,7 @@ namespace sict{
     //
     // 
     String::String(int capacity){
-        
+		m_pString[capacity] = '\0';
     }
 
     //////////////////////////////////////////////////////
@@ -33,8 +33,15 @@ namespace sict{
     //
     // 
     String::String(const char* pSource, int capacity){
-  
-        
+		if (strlen(pSource) > capacity) {
+			m_pString[strlen(pSource)];
+			strcpy(m_pString, pSource);
+		}
+		else {
+			m_pString[capacity];
+			strcpy(m_pString, pSource);
+		}
+
     }
 
     //////////////////////////////////////////////////////
@@ -48,7 +55,14 @@ namespace sict{
     // 
     String::String(const String& other, int capacity) 
     {
-  
+		if (strlen(other.m_pString) > capacity) {
+			m_pString[strlen(other.m_pString) + 1];
+			strcpy(m_pString, other.m_pString);
+		}
+		else {
+			m_pString[capacity] + 1;
+			strcpy(m_pString, other.m_pString);
+		}
     }
 
     
@@ -64,7 +78,8 @@ namespace sict{
     //    
     void String::resize(int newsize)
     {
-  
+		if (strlen(m_pString) + 1 < newsize);
+			m_pString = new char[newsize] + 1;
     }
                                     
   
@@ -78,7 +93,12 @@ namespace sict{
     // 
     String& String::operator=(const String& other)
     {
-   
+		if (this != &other) {
+			if (!empty()) {
+				strcpy(m_pString, other.m_pString);
+			}
+		}
+		return *this;
     }
 
 
@@ -92,7 +112,7 @@ namespace sict{
     // 
     String::~String()
     {
-
+		delete[] m_pString;
     }
 
     //////////////////////////////////////////////////////
@@ -104,7 +124,7 @@ namespace sict{
     // 
     int String::length() const
     {
-  
+		return strlen(m_pString);
     }
 
 
@@ -117,7 +137,7 @@ namespace sict{
     // 
     String::operator const char *() const
     {
-   
+		////////////////////////////////////////////////////////////////////////////////
     }
 
 
