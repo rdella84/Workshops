@@ -43,8 +43,8 @@ namespace ict{
 
 	const Item& Item::operator=(const Item& eq) {
 		if (this != &eq) {    // Item A;  A = B
-			delete[] m_name;
-			m_name = nullptr;
+			//delete[] m_name;
+			//m_name = nullptr;
 			if (isEmpty() == false) {
 				sku(eq.m_sku);
 				name(eq.m_name);

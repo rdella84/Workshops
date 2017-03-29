@@ -107,8 +107,22 @@ int main() {
   prnItem(cout, I1) << endl;
   cout << "Saving I1 in file:" << endl;
   I1.save(F);
-  cout << "Loading Saved item into I2:" << endl;
-  I2.load(F);
+
+  //---------------------DEBUGGING----------------------------------
+
+  //cout << "------------------I1------------------" << endl;
+  //prnItem(cout, I1) << endl;
+
+  //cout << "Loading Saved item into I2:" << endl;
+  //I2.load(F);
+  //
+  //cout << "------------------I2------------------" << endl;
+  //prnItem(cout, I2) << endl;
+
+  //I3 = I1;
+  //cout << "------------------I3------------------" << endl;
+  //prnItem(cout, I3) << endl;
+
   cout << "Printing Loaded item from file:" << endl;
   prnItem(cout, I2) << endl;
   cout << "Assigning Item to another..." << endl;
