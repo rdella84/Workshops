@@ -18,6 +18,7 @@ namespace ict {
 		Item(const char sku[MAX_SKU_LEN], const char * name, double price, bool tax = true);
 		virtual ~Item();
 		const Item& operator=(const Item& m) ;
+		Item(const Item&);
 		//void cpyConstructor(const char * sku, const char * name, double price, bool tax = true);
 
 		//Setters

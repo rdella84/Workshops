@@ -18,8 +18,8 @@ namespace ict{
 
 	Item::Item(const char sku[MAX_SKU_LEN], const char * name, double price, bool tax)
 	{
+		m_name = nullptr;
 		this->sku(sku);
-		m_name = new char[strlen(name) + 1];
 		this->name(name);
 		quantity(0);
 		this->price(price);
@@ -30,30 +30,29 @@ namespace ict{
 	Item::~Item() {
 		delete[] m_name;
 	}
-/*
-	void Item::cpyConstructor(const char * sku, const char * name, double price, bool tax) {
 
-		strcpy(m_sku, sku);
-		m_name = new char[sizeof(name) + 1];
-		strcpy(m_name, name);
+	Item::Item(const Item& C) {  //copy constructor!!!!!!!!!!!!!!!!!!!!!!!!!!
+		m_name = nullptr;
+		strcpy(m_sku, C.m_sku);
+		name(C.name());
 		m_quantity = 0;
-		m_price = price;
-		m_taxed = tax;
+		m_price = C.m_price;
+		m_taxed = C.m_taxed;
 	}
-*/
+
 
 	const Item& Item::operator=(const Item& eq) {
-		delete[] m_name;
-		m_name = nullptr;
-		if (isEmpty() == false) {
-			sku(eq.m_sku);
-			m_name = new char[strlen(eq.m_name) + 1];
-			name(eq.m_name);
-			m_quantity = 0;
-			price(eq.m_price);
-			taxed(eq.m_taxed);
+		if (this != &eq) {    // Item A;  A = B
+			delete[] m_name;
+			m_name = nullptr;
+			if (isEmpty() == false) {
+				sku(eq.m_sku);
+				name(eq.m_name);
+				m_quantity = 0;
+				price(eq.m_price);
+				taxed(eq.m_taxed);
+			}
 		}
-		
 		return *this;
 	}
 
@@ -62,8 +61,10 @@ namespace ict{
 	void Item::sku(const char * sku) {
 		strcpy(m_sku, sku);
 	}
-	void Item::name(const char * name) {
-		strcpy(m_name, name);
+	void Item::name(const char * value) {
+		delete[] m_name;
+		m_name = new char[strlen(value) + 1];
+		strcpy(m_name, value);
 	}
 	
 	void Item::price(double price) {
@@ -108,7 +109,7 @@ namespace ict{
 	}
 
 	bool Item::operator==(const char* sku)const {
-		return strcmp(m_sku, sku);
+		return strcmp(m_sku, sku) == 0;
 	}
 
 	int Item::operator+=(int quantity)const {
