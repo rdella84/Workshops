@@ -37,7 +37,7 @@ namespace sict
         // true if the string is empty
         bool        empty   ()                  const;
         // return a substring of the string
-        String      substr  (int index, int len)const;
+       // String      substr  (int index, int len)const;
 
         // operators functions
         // add a char to the end of the string
@@ -53,7 +53,8 @@ namespace sict
         // true if string 1 == string 2
         bool        operator==(const String& s2)const;
         
-        
+        // getter
+		const char* String::pString() const;
         
    };
 

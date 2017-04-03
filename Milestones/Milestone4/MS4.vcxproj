@@ -142,7 +142,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="01-NPErrHandling.cpp" />
     <ClCompile Include="Date.cpp" />
     <ClCompile Include="Error.cpp" />
     <ClCompile Include="Item.cpp" />

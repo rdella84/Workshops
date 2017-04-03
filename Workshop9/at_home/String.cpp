@@ -19,7 +19,8 @@ namespace sict{
     //
     // 
     String::String(int capacity){
-		m_pString[capacity] = '\0';
+		resize(capacity);
+		m_pString = nullptr;
     }
 
     //////////////////////////////////////////////////////
@@ -33,12 +34,13 @@ namespace sict{
     //
     // 
     String::String(const char* pSource, int capacity){
-		if (strlen(pSource) > capacity) {
-			m_pString[strlen(pSource)];
+		int value = strlen(pSource);
+		if (value > capacity) {
+			resize(value);
 			strcpy(m_pString, pSource);
 		}
 		else {
-			m_pString[capacity];
+			resize(capacity);
 			strcpy(m_pString, pSource);
 		}
 
@@ -55,12 +57,13 @@ namespace sict{
     // 
     String::String(const String& other, int capacity) 
     {
-		if (strlen(other.m_pString) > capacity) {
-			m_pString[strlen(other.m_pString) + 1];
+		int value = strlen(other.m_pString);
+		if (value > capacity) {
+			resize(value);
 			strcpy(m_pString, other.m_pString);
 		}
 		else {
-			m_pString[capacity] + 1;
+			resize(capacity);
 			strcpy(m_pString, other.m_pString);
 		}
     }
@@ -78,8 +81,10 @@ namespace sict{
     //    
     void String::resize(int newsize)
     {
-		if (strlen(m_pString) + 1 < newsize);
-			m_pString = new char[newsize] + 1;
+		if (m_capacity < newsize) {
+			m_capacity = newsize + 1;
+			m_pString = new char[m_capacity];
+		}
     }
                                     
   
@@ -94,9 +99,8 @@ namespace sict{
     String& String::operator=(const String& other)
     {
 		if (this != &other) {
-			if (!empty()) {
-				strcpy(m_pString, other.m_pString);
-			}
+			m_pString = other.m_pString;
+			m_capacity = strlen(other.m_pString);
 		}
 		return *this;
     }
@@ -112,7 +116,7 @@ namespace sict{
     // 
     String::~String()
     {
-		delete[] m_pString;
+		m_pString = nullptr;
     }
 
     //////////////////////////////////////////////////////
@@ -124,7 +128,11 @@ namespace sict{
     // 
     int String::length() const
     {
-		return strlen(m_pString);
+		int result = 0;
+		if (m_pString != nullptr)
+			result = strlen(m_pString);
+		
+		return result;
     }
 
 
@@ -137,7 +145,7 @@ namespace sict{
     // 
     String::operator const char *() const
     {
-		////////////////////////////////////////////////////////////////////////////////
+		return m_pString;
     }
 
 
@@ -151,7 +159,7 @@ namespace sict{
     // length is 0.
     bool String::empty() const
     {
-    
+		return this->m_pString == nullptr;
     }
     
     //////////////////////////////////////////////////////
@@ -163,7 +171,7 @@ namespace sict{
     //     
     String::operator bool() const
     {
-
+		return !empty();
     }
      
      
@@ -178,7 +186,7 @@ namespace sict{
     //      
     bool String::operator==(const String& s2) const
     {
-  
+		return (m_pString == s2.m_pString) || (strcmp(m_pString, s2) == 0);
     }
     
     
@@ -194,7 +202,8 @@ namespace sict{
     // 
     String& String::operator+=(const String& s2)
     {
- 
+		*this = (*this + s2);
+		return *this;
     }
     
     
@@ -210,7 +219,11 @@ namespace sict{
     // 
     String String::operator+(const String& s2) const
     {
-  
+		char * tempC;
+		tempC = new char[strlen(m_pString) + 1];
+		strcpy(tempC, m_pString);
+		strcat(tempC, s2.m_pString);
+		return tempC;
     }
     
     //////////////////////////////////////////////////////
@@ -222,7 +235,18 @@ namespace sict{
     //  
     String& String::operator+= (char c)
     {
-   
+
+		size_t size = strlen(m_pString);
+
+		char* ret = new char[size + 2];
+
+		strcpy(ret, m_pString);
+		ret[size] = c;
+		ret[size + 1] = '\0';
+		resize(strlen(m_pString + 2));
+		strcpy(m_pString, ret);
+
+		return *this;
     }
     
 
@@ -239,10 +263,18 @@ namespace sict{
     // both index and len have to lie inside the string. If they do not, then 
     // that is an error
     // 
-    String String::substr(int index, int len) const
-    {
-  
-    }
+	/*String String::substr(int index, int len) const
+	{
+		if (index > length() && len > length())
+
+    }*/
+
+	//getter
+	const char* String::pString() const {
+		return m_pString;
+	}
+
+
 
     //////////////////////////////////////////////////////
     //
@@ -254,7 +286,10 @@ namespace sict{
     // 
     std::ostream& operator<<(std::ostream& ostream, const String &s)
     {
-  
+		ostream << s.pString();
+		ostream.clear();
+		return ostream;
+
     }
 
     //////////////////////////////////////////////////////
