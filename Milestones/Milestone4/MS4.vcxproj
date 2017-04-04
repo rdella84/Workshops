@@ -145,6 +145,7 @@
     <ClCompile Include="Date.cpp" />
     <ClCompile Include="Error.cpp" />
     <ClCompile Include="Item.cpp" />
+    <ClCompile Include="ms4tester.cpp" />
     <ClCompile Include="NonPerishable.cpp" />
     <ClCompile Include="Perishable.cpp" />
   </ItemGroup>

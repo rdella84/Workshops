@@ -1,7 +1,3 @@
 ﻿  Perishable.cpp
-  NonPerishable.cpp
-d:\documents\oop244\workshops\milestones\milestone4\nonperishable.cpp(144): warning C4101: 'tempB': unreferenced local variable
-  Generating Code...
-d:\documents\oop244\workshops\milestones\milestone4\nonperishable.cpp(188): warning C4715: 'ict::NonPerishable::read': not all control paths return a value
-  MS4.vcxproj -> D:\Documents\OOP244\Workshops\Milestones\Milestone4\Debug\MS4.exe
-  MS4.vcxproj -> D:\Documents\OOP244\Workshops\Milestones\Milestone4\Debug\MS4.pdb (Full PDB)
+  MS4.vcxproj -> E:\Milestone4\Debug\MS4.exe
+  MS4.vcxproj -> E:\Milestone4\Debug\MS4.pdb (Full PDB)

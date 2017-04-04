@@ -4,7 +4,6 @@
 #include <iostream>
 #include "NonPerishable.h"
 #include "Date.h"
-#include <fstream>
 
 namespace ict {
 	class Perishable : public NonPerishable {

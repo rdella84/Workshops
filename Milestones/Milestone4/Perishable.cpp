@@ -2,7 +2,7 @@
 // lib includes
 #include "Perishable.h"
 #include <iostream>
-
+#include <fstream>
 
 using namespace std;
 namespace ict {
@@ -16,15 +16,15 @@ namespace ict {
 
 	fstream& Perishable::save(fstream& file)const {
 		NonPerishable::save(file) << ',' << m_expiry;
-		
+
 		return file;
 	}
 
 	fstream& Perishable::load(fstream& file) {
 		NonPerishable::load(file);
-		cin.ignore();
 		file >> m_expiry;
-		
+
+
 		return file;
 	}
 
@@ -40,29 +40,24 @@ namespace ict {
 
 		cout << "Perishable ";
 		NonPerishable::read(istr);
-		cout << "Expiry Date: ";
 
-		istr >> m_expiry;
+		if (ok())
+		{
+			cout << "Expiry date (YYYY/MM/DD): ";
+			istr >> m_expiry;
 
-		if (m_expiry.bad()) {
-			if (m_expiry.errCode() == CIN_FAILED) {
-				error("Invalid Date Entry");
-				istr.setstate(ios::failbit);
-			}
-			else if (m_expiry.errCode() == YEAR_ERROR) {
-				error("Invalid Year in Date Entry");
-				istr.setstate(ios::failbit);
-			}
-			else if (m_expiry.errCode() == MON_ERROR) {
-				error("Invalid Month in Date Entry");
-				istr.setstate(ios::failbit);
-			}
-			else if (m_expiry.errCode() == DAY_ERROR){
-				error("Invalid Day in Date Entry");
+			if (m_expiry.bad()) {
+				if (m_expiry.errCode() == CIN_FAILED)
+					error("Invalid Date Entry");
+				else if (m_expiry.errCode() == YEAR_ERROR)
+					error("Invalid Year in Date Entry");
+				else if (m_expiry.errCode() == MON_ERROR)
+					error("Invalid Month in Date Entry");
+				else if (m_expiry.errCode() == DAY_ERROR)
+					error("Invalid Day in Date Entry");
 				istr.setstate(ios::failbit);
 			}
 		}
-
 		return istr;
 	}
 }
